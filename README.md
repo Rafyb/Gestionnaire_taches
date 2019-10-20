@@ -15,4 +15,4 @@ Exectuer à l'aide de la commande `./progCommande` suivi de vos arguments
 
 ## Cas d'utilisation
 
-Exemple d'utilisation : `./progCommande -T toto`
+Exemple d'utilisation : `./progCommande emacs -T toto`
