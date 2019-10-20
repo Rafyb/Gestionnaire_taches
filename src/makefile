@@ -1,10 +1,10 @@
 CC = gcc -Wall -Werror -W 
 
-test : test.o
-	$(CC) -o test test.o
+progCommande : progCommande.o
+	$(CC) -o progCommande progCommande.o
 
-test.o : test.c
-	$(CC) -c test.c
+progCommande.o : progCommande.c
+	$(CC) -c progCommande.c
 
 
 clean:
