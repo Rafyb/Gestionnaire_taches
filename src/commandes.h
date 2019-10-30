@@ -1,2 +1,2 @@
-int executerCommandeBoucle(int nbr,int timewait,int argc, char** argv);
+int exe_cmd_ntimes(int nbr,int timewait,int argc, char** argv);
 

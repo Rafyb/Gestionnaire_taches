@@ -1,3 +1,12 @@
+/**
+ * @file      commandes.c
+ * @author    Raphael Bauvin
+ * @version   1.0
+ * @date      30 Octobre 2019
+ * @brief     Définit les fonctions utiles a l'execution de commande.
+ *
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
@@ -7,7 +16,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-int executerCommande(int argc, char** argv){
+int exe_cmd(int argc, char** argv){
     char* arg[10];
     for(int i = 0; i < argc; i++) {
         arg[i] = argv[i];
@@ -19,7 +28,7 @@ int executerCommande(int argc, char** argv){
     return 1;
 }
 
-int executerCommandeBoucle(int nbr,int timewait,int argc, char** argv){
+int exe_cmd_ntimes(int nbr,int timewait,int argc, char** argv){
     pid_t pid_fils;;
     int status;
     int timeToWait;
@@ -29,7 +38,7 @@ int executerCommandeBoucle(int nbr,int timewait,int argc, char** argv){
         pid_fils = fork();
         if(pid_fils == 0){
             int timeStart = (int)time(NULL);
-            if(executerCommande(argc,argv)==1) {
+            if(exe_cmd(argc,argv)==1) {
                 perror("Probleme execution commande");
                 if(is_init()){
                     ecris_log(1);
@@ -38,7 +47,6 @@ int executerCommandeBoucle(int nbr,int timewait,int argc, char** argv){
                 return 1;
             }
             int timeStop = (int)time(NULL);
-            printf("salut %d - %d = %d",timeStart,timeStop,timeStop - timeStart);
             exit(timeStop - timeStart);
         }
         nbr--;
