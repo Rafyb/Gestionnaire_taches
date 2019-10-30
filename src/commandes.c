@@ -38,7 +38,6 @@ int executerCommandeBoucle(int nbr,int timewait,int argc, char** argv){
         nbr--;
 
         if(nbr != 0){
-            printf("temps d'execution : %d \n",WEXITSTATUS(status));
             timeToWait -= WEXITSTATUS(status);
             printf("temps avant prochaine execution : %d\n", timeToWait);
             sleep(timeToWait);

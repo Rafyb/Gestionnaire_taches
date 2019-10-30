@@ -4,10 +4,10 @@ target : progCommande \
 
 CC = gcc -Wall -Werror -W 
 
-progCommande : progCommande.o commandes.o
-	$(CC) -o progCommande progCommande.o commandes.o
+progCommande : progCommande.o commandes.o printlog.o
+	$(CC) -o progCommande progCommande.o commandes.o printlog.o
 
-progCommande.o : progCommande.c commandes.h
+progCommande.o : progCommande.c commandes.h printlog.h
 	$(CC) -c progCommande.c
 
 options.exe : options.o
@@ -18,6 +18,9 @@ options.o : options.c
 
 commandes.o : commandes.c
 	$(CC) -c commandes.c
+
+printlog.o : printlog.c
+	$(CC) -c printlog.c
 
 clean:
 	rm -f *.o
