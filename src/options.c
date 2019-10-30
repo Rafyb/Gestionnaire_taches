@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <errno.h>
 #include <time.h>
+#include <string.h>
 
 int A = 0;
 int B = 0;
@@ -89,7 +90,24 @@ void Donne_date_heure() {
 }
 
 void Nom_prog(char* prog){
-	fprintf(fichier, "-> %s\n", prog);
+	char* chemin=getcwd(NULL,1024);
+	char* programme = NULL;
+	char* complet;
+	
+	size_t nb_chemin  = strlen(chemin);
+	size_t nb_programme = strlen(prog);
+	
+	programme = malloc (nb_programme); 
+	strcpy(programme, prog +2);
+	
+	complet = malloc( (nb_chemin + nb_programme +2) * sizeof(char));
+	complet = strcat(complet, chemin);
+	complet = strcat(complet, "/");
+	complet = strcat(complet, programme);
+	
+	fprintf(fichier, "- programme lancé: %s\n", programme);
+	fprintf(fichier, "- répertoire courant: %s\n", chemin);
+	fprintf(fichier, "- chemin complet: %s\n", complet);
 }
 
 void Ecris_Log(int log){
