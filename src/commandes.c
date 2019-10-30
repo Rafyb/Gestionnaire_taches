@@ -7,16 +7,14 @@
 #include <sys/wait.h>
 
 int executerCommande(int argc, char** argv){
-    char* arg[20];
+    char* arg[10];
     for(int i = 0; i < argc; i++) {
-        if(i > 0) { 
-            arg[i-1] = argv[i];
-        }
+        arg[i] = argv[i];
         if(i == argc-1){
-            arg[i] = NULL;
+            arg[i+1] = NULL;
         }
     }
-    execvp(argv[1],arg);
+    execvp(argv[0],arg);
     return 1;
 }
 
@@ -38,7 +36,7 @@ int executerCommandeBoucle(int nbr,int timewait,int argc, char** argv){
         }
         //wait(&status);
         timeToWait -= WEXITSTATUS(status);
-        printf("temps avant prochaine execution : %d\n", timeToWait);
+            printf("temps avant prochaine execution : %d\n", timeToWait);
         sleep(timeToWait);
         nbr--;
     }
