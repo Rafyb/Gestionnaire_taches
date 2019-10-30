@@ -16,7 +16,7 @@ int main(int argc, char** argv){
 
     fichier = fopen("../log/test.log", "w+");
 
-    if (fichier = NULL)
+    if (fichier == NULL)
     {
         printf("Erreur lors de l'ouverture du fichier de log");
         return 1;

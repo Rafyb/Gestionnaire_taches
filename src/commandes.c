@@ -24,10 +24,8 @@ int executerCommandeBoucle(int nbr,int timewait,int argc, char** argv){
     int timeToWait;
     while(nbr != 0){
         timeToWait = timewait;
-	printf("%d\n", timeToWait);
         pid_fils = fork();
         if(pid_fils == 0){
-            srand(time(NULL));
             int timeStart = (int)time(NULL);
             if(executerCommande(argc,argv)==1) {
                 perror("Probleme execution commande");
@@ -35,11 +33,14 @@ int executerCommandeBoucle(int nbr,int timewait,int argc, char** argv){
             }
             exit((int)time(NULL) - timeStart);
         }
-        //wait(&status);
-        timeToWait -= WEXITSTATUS(status);
-            printf("temps avant prochaine execution : %d\n", timeToWait);
-        sleep(timeToWait);
         nbr--;
+
+        if(nbr != 0){
+            timeToWait -= WEXITSTATUS(status);
+            printf("temps avant prochaine execution : %d\n", timeToWait);
+            sleep(timeToWait);
+        }
+        
     }
     return 0;
 }
