@@ -102,8 +102,25 @@ void ecris_date_heure(void) {
  * @author Johann
  *
  */
-void ecris_nom_prog(void){
-	fprintf(fichier, "-> %s\n", prog);
+void ecris_nom_prog(char* prog){
+	char* chemin=getcwd(NULL,1024);
+	char* programme = NULL;
+	char* complet;
+	
+	size_t nb_chemin = strlen(chemin);
+	size_t nb_programme = strlen(prog);
+	
+	programme = malloc (nb_programme); 
+	strcpy(programme, prog +2);
+	
+	complet = malloc( (nb_chemin + nb_programme +2) * sizeof(char));
+	complet = strcat(complet, chemin);
+	complet = strcat(complet, "/");
+	complet = strcat(complet, programme);
+	
+	fprintf(fichier, "- programme lancé: %s\n", programme);
+	fprintf(fichier, "- répertoire courant: %s\n", chemin);
+	fprintf(fichier, "- chemin complet: %s\n", complet);
 }
 
 /**
@@ -159,7 +176,7 @@ void ecris_log(int log){
 /**
  * La fonction ouvre le fichier des logs
  *
- * @author Raphael Bauvin
+ * @author Raphael Bauvin et Johann
  * @return 0 si le fichier est ouvert avec succé
  * @return 1 si une erreur est survenu
  *
