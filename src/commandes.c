@@ -24,6 +24,7 @@ int executerCommandeBoucle(int nbr,int timewait,int argc, char** argv){
     int timeToWait;
     while(nbr != 0){
         timeToWait = timewait;
+	printf("%d\n", timeToWait);
         pid_fils = fork();
         if(pid_fils == 0){
             srand(time(NULL));

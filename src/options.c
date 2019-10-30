@@ -9,7 +9,6 @@ int C = 0;
 int D = 0;
 int E = 0;
 
-int j = 1;
 
 int main(int argc, char** argv){
 	
@@ -28,7 +27,7 @@ int main(int argc, char** argv){
 		fprintf(fichier, "    DEBUT DU TRAITEMENT");
 		fprintf(fichier, "==========================");
 		
-		for (j; j< argc; j++) {
+		for (int j=1; j< argc; j++) {
 			if (argv[j][0]=='-'){
 				int idx = 1;
 				while (argv[j][idx]!='\0'){
