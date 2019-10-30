@@ -28,51 +28,65 @@ int main(int argc, char** argv){
 	
 	char chaine[100];
 		if (A != 0) {
-			if (argv[A +1][0]=='-') {
-				printf("Le chemin n'a pas été spécifié");
-			}
-			else
-			{
-				printf("A: %s\n", argv[A +1]);
+			if (A==argc-1)printf("Le chemin n'a pas été spécifié\n");
+			else {
+				if (argv[A +1][0]=='-') {
+					printf("Le chemin n'a pas été spécifié\n");
+				}
+				else
+				{
+					printf("A: %s\n", argv[A +1]);
+				}
 			}
 		}
 		if (B != 0) {
-			if (argv[B +1][0]=='-') {
-				printf("Le chemin n'a pas été spécifié");
-			}
-			else
-			{
-				printf("B: %s\n", argv[B +1]);
+			if (B==argc-1)printf("Le chemin n'a pas été spécifié\n");
+			else {
+				if (argv[B +1][0]=='-') {
+					printf("Le chemin n'a pas été spécifié\n");
+				}
+				else
+				{
+					printf("B: %s\n", argv[B +1]);
+				}
 			}
 		}
 		if (C != 0) {
-			if (argv[C +1][0]=='-') {
-				printf("Le chemin n'a pas été spécifié");
-			}
-			else
-			{
-				printf("C: %s\n", argv[C +1]);
+			if (C==argc-1)printf("Le chemin n'a pas été spécifié\n");
+			else {
+				if (argv[C +1][0]=='-') {
+					printf("Le chemin n'a pas été spécifié\n");
+				}
+				else
+				{
+					printf("C: %s\n", argv[C +1]);
+				}
 			}
 		}
 		if (D != 0) {
-			if (argv[D +1][0]=='-') {
-				printf("Le chemin n'a pas été spécifié");
-			}
-			else
-			{
-				printf("D: %s\n", argv[D +1]);
+			if (D==argc-1)printf("Le chemin n'a pas été spécifié\n");
+			else {
+				if (argv[D +1][0]=='-') {
+					printf("Le chemin n'a pas été spécifié\n");
+				}
+				else
+				{
+					printf("D: %s\n", argv[D +1]);
+				}
 			}
 		}
 		if (E != 0) {
-			if (argv[E +1][0]=='-') {
-				printf("Le chemin n'a pas été spécifié");
-			}
-			else
-			{
-				printf("E: %s\n", argv[E +1]);
+			if (E==argc-1)printf("Le chemin n'a pas été spécifié\n");
+			else {
+				if (argv[E +1][0]=='-') {
+					printf("Le chemin n'a pas été spécifié\n");
+				}
+				else
+				{
+					printf("E: %s\n", argv[E +1]);
+				}
 			}
 		}	
-	
 
 return 0;
 }
