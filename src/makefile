@@ -11,10 +11,10 @@ progCommande.o : progCommande.c commandes.h
 	$(CC) -c progCommande.c
 
 options.exe : options.o
-	gcc -o options.exe options.o
+	$(CC) -o options.exe options.o
 	
 options.o : options.c
-	gcc -c options.c
+	$(CC) -c options.c
 
 commandes.o : commandes.c
 	$(CC) -c commandes.c
