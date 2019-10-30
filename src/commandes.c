@@ -31,11 +31,14 @@ int executerCommandeBoucle(int nbr,int timewait,int argc, char** argv){
                 perror("Probleme execution commande");
                 return 1;
             }
-            exit((int)time(NULL) - timeStart);
+            int timeStop = (int)time(NULL);
+            printf("salut %d - %d = %d",timeStart,timeStop,timeStop - timeStart);
+            exit(timeStop - timeStart);
         }
         nbr--;
 
         if(nbr != 0){
+            printf("temps d'execution : %d \n",WEXITSTATUS(status));
             timeToWait -= WEXITSTATUS(status);
             printf("temps avant prochaine execution : %d\n", timeToWait);
             sleep(timeToWait);
