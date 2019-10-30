@@ -27,6 +27,7 @@ int main(int argc, char** argv)
 
   pid_t pid_fils = fork();
 
+  // temporaire 
   if(pid_fils == 0){
     if(executerCommande(argc,argv)==1) perror("Probleme execution commande");
   }
