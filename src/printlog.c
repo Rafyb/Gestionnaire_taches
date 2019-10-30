@@ -189,7 +189,7 @@ int init_log(char* nom_prog){
         perror("Erreur lors de l'ouverture du fichier de log");
         return 1;
     }
-	ecris_nom_prog();
+	ecris_nom_prog(prog);
 	ecris_date_heure();
 	ecris_log(-1);
     return 0;
