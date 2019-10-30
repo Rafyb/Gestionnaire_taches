@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
+#include "printlog.h"
 #include <time.h>
 #include <unistd.h>
 #include <sys/types.h>
@@ -22,6 +23,7 @@ int executerCommandeBoucle(int nbr,int timewait,int argc, char** argv){
     pid_t pid_fils;;
     int status;
     int timeToWait;
+
     while(nbr != 0){
         timeToWait = timewait;
         pid_fils = fork();
@@ -29,6 +31,10 @@ int executerCommandeBoucle(int nbr,int timewait,int argc, char** argv){
             int timeStart = (int)time(NULL);
             if(executerCommande(argc,argv)==1) {
                 perror("Probleme execution commande");
+                if(is_init()){
+                    ecris_log(1);
+                    close_log();
+                }
                 return 1;
             }
             int timeStop = (int)time(NULL);
@@ -43,6 +49,10 @@ int executerCommandeBoucle(int nbr,int timewait,int argc, char** argv){
             sleep(timeToWait);
         }
         
+    }
+    if(is_init()){
+        ecris_log(0);
+        close_log();
     }
     return 0;
 }

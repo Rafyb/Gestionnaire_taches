@@ -13,6 +13,10 @@ int init_log(void){
     return 0;
 }
 
+int is_init(void){
+	return fichier != NULL;
+}
+
 int close_log(void){
     return fclose(fichier);
 }
