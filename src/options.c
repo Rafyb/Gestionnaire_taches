@@ -9,10 +9,33 @@ int C = 0;
 int D = 0;
 int E = 0;
 
+FILE* fichier = NULL;
+
+void Ecris_Log(int log){
+	switch(log){
+		case -1:
+			fprintf(fichier, "==========================\n");
+			fprintf(fichier, "    DEBUT DU TRAITEMENT   \n");
+			fprintf(fichier, "==========================\n");
+			break;
+		case 0:
+			fprintf(fichier, "==========================\n");
+			fprintf(fichier, "FIN NORMALE DU TRAITEMENT\n");
+			fprintf(fichier, "==========================\n");
+			break;
+		case 1:
+			fprintf(fichier, "==========================\n");
+			fprintf(fichier, "FIN ANORMALE DU TRAITEMENT\n");
+			fprintf(fichier, "==========================\n");
+			break;
+		case 2:
+			fprintf(fichier, "Le chemin n'a pas été spécifié\n");
+			break;
+	}
+}
+
 
 int main(int argc, char** argv){
-	
-	FILE* fichier = NULL;
 
     fichier = fopen("../log/test.log", "w+");
 
@@ -23,9 +46,7 @@ int main(int argc, char** argv){
     }
     else
     {
-		fprintf(fichier, "==========================");
-		fprintf(fichier, "    DEBUT DU TRAITEMENT");
-		fprintf(fichier, "==========================");
+		Ecris_Log(-1);
 		
 		for (int j=1; j< argc; j++) {
 			if (argv[j][0]=='-'){
@@ -44,10 +65,8 @@ int main(int argc, char** argv){
 		if (A != 0) {
 			if (A==argc-1) {
 				printf("Le chemin n'a pas été spécifié\n");
-				fprintf(fichier, "Le chemin n'a pas été spécifié\n");
-				fprintf(fichier, "==========================");
-				fprintf(fichier, "FIN ANORMALE DU TRAITEMENT");
-				fprintf(fichier, "==========================");
+				Ecris_Log(2);
+				Ecris_Log(1);
 				fclose(fichier);
 				return 1;
 				
@@ -55,10 +74,8 @@ int main(int argc, char** argv){
 			else {
 				if (argv[A +1][0]=='-') {
 					printf("Le chemin n'a pas été spécifié\n");
-					fprintf(fichier, "Le chemin n'a pas été spécifié\n");
-					fprintf(fichier, "==========================");
-					fprintf(fichier, "FIN ANORMALE DU TRAITEMENT");
-					fprintf(fichier, "==========================");
+					Ecris_Log(2);
+					Ecris_Log(1);
 					fclose(fichier);
 					return 1;
 				}
@@ -72,20 +89,16 @@ int main(int argc, char** argv){
 		if (B != 0) {
 			if (B==argc-1) {
 				printf("Le chemin n'a pas été spécifié\n");
-				fprintf(fichier, "Le chemin n'a pas été spécifié\n");
-				fprintf(fichier, "==========================");
-				fprintf(fichier, "FIN ANORMALE DU TRAITEMENT");
-				fprintf(fichier, "==========================");
+				Ecris_Log(2);
+				Ecris_Log(1);
 				fclose(fichier);
 				return 1;
 			}
 			else {
 				if (argv[B +1][0]=='-') {
 					printf("Le chemin n'a pas été spécifié\n");
-					fprintf(fichier, "Le chemin n'a pas été spécifié\n");
-					fprintf(fichier, "==========================");
-					fprintf(fichier, "FIN ANORMALE DU TRAITEMENT");
-					fprintf(fichier, "==========================");
+					Ecris_Log(2);
+					Ecris_Log(1);
 					fclose(fichier);
 					return 1;
 				}
@@ -99,20 +112,16 @@ int main(int argc, char** argv){
 		if (C != 0) {
 			if (C==argc-1) {
 				printf("Le chemin n'a pas été spécifié\n");
-				fprintf(fichier, "Le chemin n'a pas été spécifié\n");
-				fprintf(fichier, "==========================");
-				fprintf(fichier, "FIN ANORMALE DU TRAITEMENT");
-				fprintf(fichier, "==========================");
+				Ecris_Log(2);
+				Ecris_Log(1);
 				fclose(fichier);
 				return 1;
 			}		
 			else {
 				if (argv[C +1][0]=='-') {
 					printf("Le chemin n'a pas été spécifié\n");
-					fprintf(fichier, "Le chemin n'a pas été spécifié\n");
-					fprintf(fichier, "==========================");
-					fprintf(fichier, "FIN ANORMALE DU TRAITEMENT");
-					fprintf(fichier, "==========================");
+					Ecris_Log(2);
+					Ecris_Log(1);
 					fclose(fichier);
 					return 1;
 				}
@@ -126,20 +135,16 @@ int main(int argc, char** argv){
 		if (D != 0) {
 			if (D==argc-1) {
 				printf("Le chemin n'a pas été spécifié\n");
-				fprintf(fichier, "Le chemin n'a pas été spécifié\n");
-				fprintf(fichier, "==========================");
-				fprintf(fichier, "FIN ANORMALE DU TRAITEMENT");
-				fprintf(fichier, "==========================");
+				Ecris_Log(2);
+				Ecris_Log(1);
 				fclose(fichier);
 				return 1;
 			}
 			else {
 				if (argv[D +1][0]=='-') {
 					printf("Le chemin n'a pas été spécifié\n");
-					fprintf(fichier, "Le chemin n'a pas été spécifié\n");
-					fprintf(fichier, "==========================");
-					fprintf(fichier, "FIN ANORMALE DU TRAITEMENT");
-					fprintf(fichier, "==========================");
+					Ecris_Log(2);
+					Ecris_Log(1);
 					fclose(fichier);
 					return 1;
 				}
@@ -153,20 +158,16 @@ int main(int argc, char** argv){
 		if (E != 0) {
 			if (E==argc-1) {
 				printf("Le chemin n'a pas été spécifié\n");
-				fprintf(fichier, "Le chemin n'a pas été spécifié\n");
-				fprintf(fichier, "==========================");
-				fprintf(fichier, "FIN ANORMALE DU TRAITEMENT");
-				fprintf(fichier, "==========================");
+				Ecris_Log(2);
+				Ecris_Log(1);
 				fclose(fichier);
 				return 1;
 			}
 			else {
 				if (argv[E +1][0]=='-') {
 					printf("Le chemin n'a pas été spécifié\n");
-					fprintf(fichier, "Le chemin n'a pas été spécifié\n");
-					fprintf(fichier, "==========================");
-					fprintf(fichier, "FIN ANORMALE DU TRAITEMENT");
-					fprintf(fichier, "==========================");
+					Ecris_Log(2);
+					Ecris_Log(1);
 					fclose(fichier);
 					return 1;
 				}
@@ -178,9 +179,7 @@ int main(int argc, char** argv){
 			}
 		}	
 	}
-	fprintf(fichier, "==========================");
-	fprintf(fichier, "FIN NORMALE DU TRAITEMENT");
-	fprintf(fichier, "==========================");
+	Ecris_Log(0);
 	fclose(fichier);
 	return 0;
 }
