@@ -17,6 +17,18 @@
 #include <time.h>
 #include <unistd.h>
 
+void print_help() {
+  printf("Veuillez à ce que la synthaxe "
+         "corresponde à : progCommande {options} [nombre repetition] [delai] "
+         "[ligne de commande a executer] \nOptions disponibles : \n "
+         "	-l ( ou -L ) pour activer les logs\n"
+         "	-h ( ou -H ) pour spécifier que le temps fournis est en heure\n"
+         "	-m ( ou -M ) pour spécifier que le temps fournis est en "
+         "minute\n"
+         "	-r ( ou -R ) si les commandes sont spécifiés dans un fichier "
+         "avec une synthaxe spécifique\n");
+}
+
 int exe_cmd(int argc, char **argv) {
   char *arg[10];
   for (int i = 0; i < argc; i++) {

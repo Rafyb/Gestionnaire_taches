@@ -25,7 +25,6 @@
  * Les options suivantes sont disponibles :
  *    -l ( ou -L ) pour activer les logs
  * @todo :
- *    -p ( ou -P ) pour spécifier le chemin de la commande
  *    -h ( ou -H ) pour spécifier que le temps fournis est en heure
  *    -m ( ou -M ) pour spécifier que le temps fournis est en minute
  *    -r ( ou -R ) si les commandes sont spécifiés dans un fichier avec une
@@ -39,10 +38,9 @@ int main(int argc, char **argv) {
 
   // ------ Test du nombre d'argument
   if (argc < 4) {
-    perror("Nombre d'argument invalide \n Veuillez à ce que la synthaxe "
-           "corresponde à : progCommande {options} [nombre repetition] [delai] "
-           "[ligne de commande a executer]");
-    return 1;
+    perror("Nombre d'argument invalide");
+    print_help();
+    return 3;
   }
 
   // ------ Gerer les options
@@ -90,10 +88,9 @@ int main(int argc, char **argv) {
   int timewait = atoi(argv[opt + 1]);
   int taille = argc - (opt + 2);
   if (nbr == 0 || timewait == 0) {
-    perror("Nombre d'argument invalide \n Veuillez à ce que la synthaxe "
-           "corresponde à : progCommande {options} [nombre repetition] [delai] "
-           "[ligne de commande a executer]");
-    return 1;
+    perror("Nombre d'argument invalide");
+    print_help();
+    return 2;
   }
 
   char *ligne_de_commande[10];

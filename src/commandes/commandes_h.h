@@ -10,6 +10,8 @@
 #ifndef COMMANDES_H
 #define COMMANDES_H
 
+void print_help(void);
+
 int exe_cmd(int argc, char **argv);
 
 int exe_cmd_ntimes(int nbr, int timewait, int argc, char **argv);
