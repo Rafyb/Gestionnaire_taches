@@ -11,12 +11,28 @@
 #define PRINTLOG_H
 
 /**
+ *  La fonction écris le message d'erreur dans les logs puis ferme le fichier
+ *
+ * @author Raphael
+ *
+ **/
+void erreur_traitement(char *errorMsg);
+
+/**
+ * La fonction écris dans les logs le message ainsi que la date et l'heure
+ * d'enregistrement
+ *
+ * @author Johann
+ *
+ */
+void ecris_log(char *trace);
+/**
  * La fonction
  *
  * @author Johann
  *
  */
-void ecris_log(int log);
+void ecris_log_ES(int log);
 /**
  * La fonction
  *

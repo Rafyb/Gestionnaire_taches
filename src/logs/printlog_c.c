@@ -18,6 +18,22 @@ FILE *fichier = NULL;
 char *prog = NULL;
 
 /**
+ *  La fonction écris le message d'erreur dans les logs puis ferme le fichier
+ *
+ * @author Raphael
+ *
+ **/
+void erreur_traitement(char *errorMsg) {
+  perror(errorMsg);
+  if (is_init()) {
+    ecris_log(errorMsg);
+    ecris_log_ES(1);
+    close_log();
+  }
+  exit(EXIT_FAILURE);
+}
+
+/**
  * La fonction
  *
  * @author Johann
@@ -146,12 +162,24 @@ int is_init(void) { return fichier != NULL; }
 int close_log(void) { return fclose(fichier); }
 
 /**
+ * La fonction écris dans les logs le message ainsi que la date et l'heure
+ * d'enregistrement
+ *
+ * @author Johann
+ *
+ */
+void ecris_log(char *trace) {
+  ecris_date_heure();
+  fprintf(fichier, "%s\n", trace);
+  fflush(fichier);
+}
+/**
  * La fonction
  *
  * @author Johann
  *
  */
-void ecris_log(int log) {
+void ecris_log_ES(int log) {
   switch (log) {
   case -1:
     fprintf(fichier, "==========================\n");
@@ -168,16 +196,13 @@ void ecris_log(int log) {
     fprintf(fichier, "FIN ANORMALE DU TRAITEMENT\n");
     fprintf(fichier, "==========================\n");
     break;
-  case 2:
-    fprintf(fichier, "Le chemin n'a pas été spécifié\n");
-    break;
   }
+  fflush(fichier);
 }
 
 /**
  * La fonction ouvre le fichier des logs
  *
- * @author Raphael Bauvin et Johann
  * @return 0 si le fichier est ouvert avec succé
  * @return 1 si une erreur est survenu
  *
@@ -191,6 +216,6 @@ int init_log(char *nom_prog) {
   }
   ecris_nom_prog(prog);
   ecris_date_heure();
-  ecris_log(-1);
+  ecris_log_ES(-1);
   return 0;
 }
