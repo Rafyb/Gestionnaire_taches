@@ -97,7 +97,6 @@ int main(int argc, char **argv) {
   // ------ Passer la l'execution de la commande
   int nbr = atoi(argv[++opt]);                // Nombre de répétition
   int timewait = (atoi(argv[++opt]) * m) * h; // Temps entre chaque répétition
-
   if (nbr == 0 || timewait == 0) {
     perror("Nombre d'argument invalide");
     print_help();

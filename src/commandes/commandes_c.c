@@ -27,7 +27,9 @@ void print_help() {
   printf(
       "Veuillez à ce que la synthaxe "
       "corresponde à : progCommande {options} [nombre repetition] [delai] "
-      "[ligne de commande a executer] \nOptions disponibles : \n "
+      "[ligne de commande a executer]\n/!\\ Attention le délai et le nombre "
+      "de répétition ne peuvent pas être inférieur à 1\nOptions disponibles : "
+      "\n "
       "	-l ( ou -L ) pour activer les logs\n"
       "	-h ( ou -H ) pour spécifier que le temps fournis est en heure\n"
       "	-m ( ou -M ) pour spécifier que le temps fournis est en "
@@ -150,6 +152,7 @@ int exe_cmd_ntimes(int nbr, int timewait, int argc, char **argv, char *path) {
 
   // Fin normal du programme
   if (is_init()) {
+    wait(NULL);
     ecris_log_ES(0);
     close_log();
   }
