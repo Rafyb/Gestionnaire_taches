@@ -33,88 +33,111 @@ void erreur_traitement(char *errorMsg) {
   exit(EXIT_FAILURE);
 }
 
+char* convert_date( int dateint){
+	char* datestr = malloc(sizeof(char)*3);
+	sprintf(datestr, "%d", dateint);
+	if (dateint <= 9){
+		char* newdate = malloc(sizeof(char)*3);
+		newdate[0] = '0';
+		newdate[1] = datestr[0];
+		newdate[2] = '\0';
+		return newdate;
+	}
+return datestr;
+}
+
 /**
  * La fonction
  *
  * @author Johann
  *
  */
-void ecris_date_heure(void) {
-  time_t t;
-  struct tm *ma_tm;
-
-  time(&t);
-  ma_tm = localtime(&t);
-
-  char *jour_sem;
-  char *mois;
-
-  switch (ma_tm->tm_wday) {
-  case 0:
-    jour_sem = "Dimanche";
-    break;
-  case 1:
-    jour_sem = "Lundi";
-    break;
-  case 2:
-    jour_sem = "Mardi";
-    break;
-  case 3:
-    jour_sem = "Mercredi";
-    break;
-  case 4:
-    jour_sem = "Jeudi";
-    break;
-  case 5:
-    jour_sem = "Vendredi";
-    break;
-  case 6:
-    jour_sem = "Samedi";
-    break;
-  }
-
-  switch (ma_tm->tm_mon) {
-  case 0:
-    mois = "Janvier";
-    break;
-  case 1:
-    mois = "Février";
-    break;
-  case 2:
-    mois = "Mars";
-    break;
-  case 3:
-    mois = "Avril";
-    break;
-  case 4:
-    mois = "Mai";
-    break;
-  case 5:
-    mois = "Juin";
-    break;
-  case 6:
-    mois = "Juillet";
-    break;
-  case 7:
-    mois = "Aout";
-    break;
-  case 8:
-    mois = "Septembre";
-    break;
-  case 9:
-    mois = "Octobre";
-    break;
-  case 10:
-    mois = "Novembre";
-    break;
-  case 11:
-    mois = "Décembre";
-    break;
-  }
-
-  fprintf(fichier, "%s %d %s %d, %02d:%02d:%02d\n", jour_sem, ma_tm->tm_mday,
-          mois, ma_tm->tm_year + 1900, ma_tm->tm_hour, ma_tm->tm_min,
-          ma_tm->tm_sec);
+void ecris_date_heure(int opt) {
+	time_t t;
+	struct tm *ma_tm;
+	
+	time(&t);
+	ma_tm = localtime(&t);
+	
+	char* jour_sem;
+	char* mois;
+	
+	switch (ma_tm->tm_wday) {
+	case 0:
+		jour_sem = "Dimanche";
+		break;
+	case 1:
+		jour_sem = "Lundi";
+		break;
+	case 2:
+		jour_sem = "Mardi";
+		break;
+	case 3:
+		jour_sem = "Mercredi";
+		break;
+	case 4:
+		jour_sem = "Jeudi";
+		break;
+	case 5:
+		jour_sem = "Vendredi";
+		break;
+	case 6:
+		jour_sem = "Samedi";
+		break;
+	}
+	
+	switch (ma_tm->tm_mon) {
+	case 0:
+		mois = "Janvier";
+		break;
+	case 1:
+		mois = "Février";
+		break;
+	case 2:
+		mois = "Mars";
+		break;
+	case 3:
+		mois = "Avril";
+		break;
+	case 4:
+		mois = "Mai";
+		break;
+	case 5:
+		mois = "Juin";
+		break;
+	case 6:
+		mois = "Juillet";
+		break;
+	case 7:
+		mois = "Aout";
+		break;
+	case 8:
+		mois = "Septembre";
+		break;
+	case 9:
+		mois = "Octobre";
+		break;
+	case 10:
+		mois = "Novembre";
+		break;
+	case 11:
+		mois = "Décembre";
+		break;
+	}
+	
+	switch (opt) {
+		
+		case 1:
+		fprintf(fichier, "%s %d %s %d, %02d:%02d:%02d\n", jour_sem, ma_tm->tm_mday,mois, ma_tm->tm_year + 1900, ma_tm->tm_hour, ma_tm->tm_min,ma_tm->tm_sec);
+		break;
+		
+		case 2:
+		jour_sem = convert_date(ma_tm->tm_mday);
+		mois = convert_date(ma_tm->tm_mon+1);
+		fprintf(fichier, "|| %s/%s/%d - %02d:%02d:%02d || ",jour_sem,mois,ma_tm->tm_year + 1900, ma_tm->tm_hour, ma_tm->tm_min,ma_tm->tm_sec);
+		break;
+	
+	}
 }
 
 /**
@@ -169,7 +192,7 @@ int close_log(void) { return fclose(fichier); }
  *
  */
 void ecris_log(char *trace) {
-  ecris_date_heure();
+  ecris_date_heure(2);
   fprintf(fichier, "%s\n", trace);
   fflush(fichier);
 }
@@ -215,7 +238,7 @@ int init_log(char *nom_prog) {
     return 1;
   }
   ecris_nom_prog(prog);
-  ecris_date_heure();
+  ecris_date_heure(1);
   ecris_log_ES(-1);
   return 0;
 }

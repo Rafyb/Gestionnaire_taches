@@ -39,7 +39,7 @@ void ecris_log_ES(int log);
  * @author Johann
  *
  */
-void ecris_date_heure(void);
+void ecris_date_heure(int opt);
 /**
  * La fonction
  *
