@@ -87,28 +87,6 @@ int exe_cmd_path(int argc, char **argv, char *path) {
   return 1;
 }
 
-int wait_before_next_exec(int timeStart, int timewait) {
-  int status;
-  int timeToWait;
-  // on attend la fin de la commande
-  wait(&status);
-  int timeStop = (int)time(NULL);
-  // On retire le temps d'éxécution au temps à attendre
-  timeToWait = timewait - (timeStop - timeStart);
-  // Si le temps d'éxécution a duré plus longtemps que le temps d'attentes
-  if (timeToWait < 0)
-    timeToWait = 0; // on éxécute direct sans attendre
-  if (is_init()) {
-    ecris_log("temps avant prochaine execution : ");
-    char timed[20];
-    sprintf(timed, "%d secondes", timeToWait);
-    ecris_log(timed);
-  }
-  // On attend
-  sleep(timeToWait);
-  return timeToWait;
-}
-
 /**
  * Gére la boucle de répétition et du délai d'attente de chaque éxécution
  *
@@ -130,7 +108,6 @@ int exe_cmd_ntimes(int nbr, int timewait, int argc, char **argv, char *path) {
       erreur_traitement("Erreur fork");
     }
     // Execution dans le fils
-    int timeStart = (int)time(NULL);
     if (pid_fils == 0) {
       // Si il y a un chemin spécifié on execute depuis le chemin spécifié
       if (strlen(path) > 0) {
@@ -146,7 +123,7 @@ int exe_cmd_ntimes(int nbr, int timewait, int argc, char **argv, char *path) {
 
     // Tant qu'il reste une execution on attends avant la suivante
     if (nbr != 0) {
-      wait_before_next_exec(timeStart, timewait);
+      sleep(timewait);
     }
   }
 
