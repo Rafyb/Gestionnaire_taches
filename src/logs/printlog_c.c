@@ -32,7 +32,12 @@ void erreur_traitement(char *errorMsg) {
   }
   exit(EXIT_FAILURE);
 }
-
+/**
+ * La fonction
+ *
+ * @author Johann Raphael
+ *
+ */
 char* convert_date( int dateint){
 	char* datestr = malloc(sizeof(char)*3);
 	sprintf(datestr, "%d", dateint);
@@ -45,7 +50,20 @@ char* convert_date( int dateint){
 	}
 return datestr;
 }
-
+/**
+ * La fonction
+ *
+ * @author Johann
+ *
+ */
+char* concatLigne(char* log, char* argument){
+	int nbr = strlen(log) + strlen(argument) + 1;
+	char* ligne = malloc(sizeof(char) * nbr);
+	strcpy(ligne,"");
+	strcat(ligne,log);
+	strcat(ligne,argument);
+	return ligne;
+}
 /**
  * La fonction
  *
@@ -205,19 +223,19 @@ void ecris_log(char *trace) {
 void ecris_log_ES(int log) {
   switch (log) {
   case -1:
-    fprintf(fichier, "==========================\n");
-    fprintf(fichier, "    DEBUT DU TRAITEMENT   \n");
-    fprintf(fichier, "==========================\n");
+    fprintf(fichier, "====================================================\n");
+    fprintf(fichier, "                  DEBUT DU TRAITEMENT   \n");
+    fprintf(fichier, "====================================================\n");
     break;
   case 0:
-    fprintf(fichier, "==========================\n");
-    fprintf(fichier, "FIN NORMALE DU TRAITEMENT\n");
-    fprintf(fichier, "==========================\n");
+    fprintf(fichier, "====================================================\n");
+    fprintf(fichier, "              FIN NORMALE DU TRAITEMENT\n");
+    fprintf(fichier, "====================================================\n");
     break;
   case 1:
-    fprintf(fichier, "==========================\n");
-    fprintf(fichier, "FIN ANORMALE DU TRAITEMENT\n");
-    fprintf(fichier, "==========================\n");
+    fprintf(fichier, "====================================================\n");
+    fprintf(fichier, "              FIN ANORMALE DU TRAITEMENT\n");
+    fprintf(fichier, "====================================================\n");
     break;
   }
   fflush(fichier);

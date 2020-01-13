@@ -25,6 +25,20 @@ void erreur_traitement(char *errorMsg);
  * @author Johann
  *
  */
+char* concatLigne(char* log, char* argument);
+/**
+ * La fonction
+ *
+ * @author Johann
+ *
+ */
+char* convert_date( int dateint);
+/**
+ * La fonction
+ *
+ * @author Johann Raphael
+ *
+ */
 void ecris_log(char *trace);
 /**
  * La fonction

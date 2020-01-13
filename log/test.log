@@ -1,16 +1,15 @@
 - programme lancé: progCommande
-- répertoire courant: /home/raphael/Gestionnaire_taches
-- chemin complet: /home/raphael/Gestionnaire_taches/progCommande
-Dimanche 12 Janvier 2020, 22:14:27
-==========================
-    DEBUT DU TRAITEMENT   
-==========================
-|| 12/01/2020 - 22:14:27 || Execution de la commande : 
-|| 12/01/2020 - 22:14:27 || /home/raphael/algo_syst/chap_5/exo1
-|| 12/01/2020 - 22:14:27 || temps avant prochaine execution : 
-|| 12/01/2020 - 22:14:27 || 10 secondes
-|| 12/01/2020 - 22:14:37 || Execution de la commande : 
-|| 12/01/2020 - 22:14:37 || /home/raphael/algo_syst/chap_5/exo1
-==========================
-FIN NORMALE DU TRAITEMENT
-==========================
+- répertoire courant: /home/johann/git/Gestionnaire_taches
+- chemin complet: /home/johann/git/Gestionnaire_taches/progCommande
+Lundi 13 Janvier 2020, 00:02:29
+====================================================
+                  DEBUT DU TRAITEMENT   
+====================================================
+|| 13/01/2020 - 00:02:29 || Execution de la commande : emacs
+|| 13/01/2020 - 00:02:31 || -- fin du processus
+|| 13/01/2020 - 00:02:31 || Temps avant prochaine execution : 1 secondes
+|| 13/01/2020 - 00:02:32 || Execution de la commande : emacs
+|| 13/01/2020 - 00:02:37 || -- fin du processus
+====================================================
+              FIN NORMALE DU TRAITEMENT
+====================================================

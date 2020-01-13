@@ -31,11 +31,11 @@ void print_help() {
       "de répétition ne peuvent pas être inférieur à 1\nOptions disponibles : "
       "\n "
       "	-l ( ou -L ) pour activer les logs\n"
-      "	-h ( ou -H ) pour spécifier que le temps fournis est en heure\n"
-      "	-m ( ou -M ) pour spécifier que le temps fournis est en "
-      "minute\n"
+      "	-h ( ou -H ) pour spécifier que le temps fourni est en heures\n"
+      "	-m ( ou -M ) pour spécifier que le temps fourni est en "
+      "minutes\n"
       "	-p ( ou -P ) pour spécifier l'emplacement de la commande à éxécuter "
-      "avec une synthaxe spécifique\n");
+      "avec une syntaxe spécifique\n");
 }
 
 /**
@@ -48,6 +48,7 @@ void print_help() {
  **/
 int exe_cmd(int argc, char **argv) {
   char *arg[10];
+  char *ligne;
   for (int i = 0; i < argc; i++) {
     arg[i] = argv[i];
     if (i == argc - 1) {
@@ -55,8 +56,8 @@ int exe_cmd(int argc, char **argv) {
     }
   }
   if (is_init()) {
-    ecris_log("Execution de la commande : ");
-    ecris_log(argv[0]);
+    ligne = concatLigne("Execution de la commande : ", argv[0]);
+    ecris_log(ligne);
   }
   execvp(argv[0], arg);
   return 1;
@@ -73,6 +74,7 @@ int exe_cmd(int argc, char **argv) {
  **/
 int exe_cmd_path(int argc, char **argv, char *path) {
   char *arg[10];
+  char *ligne;
   for (int i = 0; i < argc; i++) {
     arg[i] = argv[i];
     if (i == argc - 1) {
@@ -80,8 +82,8 @@ int exe_cmd_path(int argc, char **argv, char *path) {
     }
   }
   if (is_init()) {
-    ecris_log("Execution de la commande : ");
-    ecris_log(path);
+    ligne = concatLigne("Execution de la commande : ", path);
+    ecris_log(ligne);
   }
   execv(path, arg);
   return 1;
@@ -130,6 +132,7 @@ int exe_cmd_ntimes(int nbr, int timewait, int argc, char **argv, char *path) {
   // Fin normal du programme
   if (is_init()) {
     wait(NULL);
+    ecris_log("-- fin du processus");
     ecris_log_ES(0);
     close_log();
   }
