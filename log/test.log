@@ -1,15 +1,16 @@
 - programme lancé: progCommande
-- répertoire courant: /home/johann/git/Gestionnaire_taches
-- chemin complet: /home/johann/git/Gestionnaire_taches/progCommande
-Lundi 13 Janvier 2020, 00:02:29
+- répertoire courant: /home/raphael/Gestionnaire_taches
+- chemin complet: /home/raphael/Gestionnaire_taches/progCommande
+Lundi 13 Janvier 2020, 18:35:21
 ====================================================
                   DEBUT DU TRAITEMENT   
 ====================================================
-|| 13/01/2020 - 00:02:29 || Execution de la commande : emacs
-|| 13/01/2020 - 00:02:31 || -- fin du processus
-|| 13/01/2020 - 00:02:31 || Temps avant prochaine execution : 1 secondes
-|| 13/01/2020 - 00:02:32 || Execution de la commande : emacs
-|| 13/01/2020 - 00:02:37 || -- fin du processus
+|| 13/01/2020 - 18:35:21 || Temps avant prochaine éxécution : 10 secondes 
+|| 13/01/2020 - 18:35:31 || Temps avant prochaine éxécution : 10 secondes 
+|| 13/01/2020 - 18:35:31 || Execution de la commande : emacs
+|| 13/01/2020 - 18:35:41 || Temps avant prochaine éxécution : 10 secondes 
+|| 13/01/2020 - 18:35:41 || Execution de la commande : emacs
+|| 13/01/2020 - 18:35:51 || Execution de la commande : emacs
 ====================================================
               FIN NORMALE DU TRAITEMENT
 ====================================================

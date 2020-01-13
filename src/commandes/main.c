@@ -29,6 +29,7 @@
  *    -h ( ou -H ) pour spécifier que le temps fournis est en heure
  *    -m ( ou -M ) pour spécifier que le temps fournis est en minute
  *    -p ( ou -P ) pour spécifier le chemin
+ *    -d ( ou -D ) pour que la première execution se fasse après le delai
  *
  * @author Raphael Bauvin / Johann
  * @param argc nombre d'argument
@@ -48,6 +49,8 @@ int main(int argc, char **argv) {
   char *path = ""; // - path
   int h = 1;       // - heure
   int m = 1;       // - minute
+  int l = 1;       // - log
+  int d = 1;       // - différé
 
   for (int j = 1; j < argc; j++) {
     if (argv[j][0] == '-') {
@@ -84,8 +87,14 @@ int main(int argc, char **argv) {
           }
           idx += strlen(path);
         }
+        // Utilisation d'un lancement différé
+        if ((argv[j][idx] == 'd' || argv[j][idx] == 'D') && d == 1) {
+          d = 0;
+          opt++;
+        }
         // Utilisation des logs
-        if (argv[j][idx] == 'l' || argv[j][idx] == 'L') {
+        if ((argv[j][idx] == 'l' || argv[j][idx] == 'L') && l == 1) {
+          l = 0;
           opt++;
           init_log(argv[0]);
         }
@@ -117,11 +126,10 @@ int main(int argc, char **argv) {
     exit(errno);
   }
   if (pid_fils == 0) {
-    // printf("%d\n", nbr);
-    // printf("%d\n", timewait);
-    // printf("%d\n", taille);
-    // printf("%s\n", ligne_de_commande[0]);
-    // printf("%s\n", path);
+    if (d == 0) {
+      ecris_temps(timewait);
+      sleep(timewait);
+    }
     exe_cmd_ntimes(nbr, timewait, taille, ligne_de_commande, path);
   }
 

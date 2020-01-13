@@ -35,7 +35,8 @@ void print_help() {
       "	-m ( ou -M ) pour spécifier que le temps fourni est en "
       "minutes\n"
       "	-p ( ou -P ) pour spécifier l'emplacement de la commande à éxécuter "
-      "avec une syntaxe spécifique\n");
+      "avec une syntaxe spécifique\n -d ( ou -D ) pour que la première "
+      "execution se fasse après le delai\n");
 }
 
 /**
@@ -48,17 +49,15 @@ void print_help() {
  **/
 int exe_cmd(int argc, char **argv) {
   char *arg[10];
-  char *ligne;
   for (int i = 0; i < argc; i++) {
     arg[i] = argv[i];
     if (i == argc - 1) {
       arg[i + 1] = NULL;
     }
   }
-  if (is_init()) {
-    ligne = concatLigne("Execution de la commande : ", argv[0]);
-    ecris_log(ligne);
-  }
+  if (is_init())
+    ecris_log(concatLigne("Execution de la commande : ", argv[0]));
+
   execvp(argv[0], arg);
   return 1;
 }
@@ -74,17 +73,15 @@ int exe_cmd(int argc, char **argv) {
  **/
 int exe_cmd_path(int argc, char **argv, char *path) {
   char *arg[10];
-  char *ligne;
   for (int i = 0; i < argc; i++) {
     arg[i] = argv[i];
     if (i == argc - 1) {
       arg[i + 1] = NULL;
     }
   }
-  if (is_init()) {
-    ligne = concatLigne("Execution de la commande : ", path);
-    ecris_log(ligne);
-  }
+  if (is_init())
+    ecris_log(concatLigne("Execution de la commande : ", path));
+
   execv(path, arg);
   return 1;
 }
@@ -125,14 +122,14 @@ int exe_cmd_ntimes(int nbr, int timewait, int argc, char **argv, char *path) {
 
     // Tant qu'il reste une execution on attends avant la suivante
     if (nbr != 0) {
+      ecris_temps(timewait);
       sleep(timewait);
     }
   }
 
   // Fin normal du programme
   if (is_init()) {
-    wait(NULL);
-    ecris_log("-- fin du processus");
+    waitpid(pid_fils, NULL, 0); // Attends la fin du dernier processus lancé
     ecris_log_ES(0);
     close_log();
   }

@@ -17,7 +17,13 @@
  *
  **/
 void erreur_traitement(char *errorMsg);
-
+/**
+ *  La fonction écris le temps avant la prochaine execution
+ *
+ * @author Raphael
+ *
+ **/
+void ecris_temps(int timewait);
 /**
  * La fonction écris dans les logs le message ainsi que la date et l'heure
  * d'enregistrement
@@ -25,14 +31,14 @@ void erreur_traitement(char *errorMsg);
  * @author Johann
  *
  */
-char* concatLigne(char* log, char* argument);
+char *concatLigne(char *log, char *argument);
 /**
  * La fonction
  *
  * @author Johann
  *
  */
-char* convert_date( int dateint);
+char *convert_date(int dateint);
 /**
  * La fonction
  *
