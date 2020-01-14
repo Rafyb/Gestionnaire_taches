@@ -1,27 +1,20 @@
 /**
  * @file      printlog_c.c
- * @author    Johann
- * @version   1.0
+ * @author    Raphael Bauvin, Johann De Almeida
+ * @version   14012020
  * @date      30 Octobre 2019
- * @brief     Définit les fonctions utiles a l'ecritures des logs.
+ * @brief     Définit les fonctions utiles a l'ecritures dans les logs.
  *
  */
-
-#include "printlog_h.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <time.h>
-#include <unistd.h>
+#include "../libused.h"
 
 FILE *fichier = NULL;
-char *prog = NULL;
 
 /**
- *  La fonction écris le message d'erreur dans les logs puis ferme le fichier
+ *  @brief La fonction écrit le message d'erreur dans les logs puis ferme le
+ * fichier
  *
- * @author Raphael
- *
+ * @param errorMsg : le message d'erreur a écrire
  **/
 void erreur_traitement(char *errorMsg) {
   perror(errorMsg);
@@ -32,11 +25,11 @@ void erreur_traitement(char *errorMsg) {
   }
   exit(EXIT_FAILURE);
 }
+
 /**
- *  La fonction écris le temps avant la prochaine execution
+ *  @brief La fonction écrit le temps avant la prochaine execution dans les logs
  *
- * @author Raphael
- *
+ * @param timewait : temps à attendre avant prochaine execution
  **/
 void ecris_temps(int timewait) {
   char timewaitstr[12];
@@ -44,11 +37,12 @@ void ecris_temps(int timewait) {
   char *ligne = concatLigne("Temps avant prochaine éxécution : ", timewaitstr);
   ecris_log(concatLigne(ligne, " secondes "));
 }
+
 /**
- * La fonction
+ * @brief La fonction converti un entier en chaine de 2 caractères
  *
- * @author Johann Raphael
- *
+ * @param dateint : le numéro du jour ou du mois en nombre
+ * @return datestr : le numéro du jour ou du mois en chaine de caractères
  */
 char *convert_date(int dateint) {
   char *datestr = malloc(sizeof(char) * 3);
@@ -62,11 +56,14 @@ char *convert_date(int dateint) {
   }
   return datestr;
 }
+
 /**
- * La fonction
+ * @brief La fonction concatene les 2 chaines de caractères à la manière de
+ * strcat
  *
- * @author Johann
- *
+ * @param log : premiere chaine
+ * @param argument : deuxieme chaine
+ * @return ligne : la ligne concaténé
  */
 char *concatLigne(char *log, char *argument) {
   int nbr = strlen(log) + strlen(argument) + 1;
@@ -76,11 +73,12 @@ char *concatLigne(char *log, char *argument) {
   strcat(ligne, argument);
   return ligne;
 }
+
 /**
- * La fonction
+ * @brief La fonction écrit la date et l'heure actuelle dans les logs
  *
- * @author Johann
- *
+ * @param opt : le format de la date désiré : 1 pour le format littéral
+ *                                            2 pour le format numérique
  */
 void ecris_date_heure(int opt) {
   time_t t;
@@ -174,10 +172,9 @@ void ecris_date_heure(int opt) {
 }
 
 /**
- * La fonction
+ * @breif La fonction écrit le nom du programme dans les logs
  *
- * @author Johann
- *
+ * @param prog : nom du programme
  */
 void ecris_nom_prog(char *prog) {
   char *chemin = getcwd(NULL, 1024);
@@ -201,39 +198,36 @@ void ecris_nom_prog(char *prog) {
 }
 
 /**
- * La fonction verifie si le fichier est initialise
+ * @brief La fonction vérifie si le fichier est initialisé
  *
- * @author Raphael Bauvin
  * @return 1 si fichier ouvert
  * @return 0 si fichier fermé
  */
 int is_init(void) { return fichier != NULL; }
 
 /**
- * La fonction ferme le fichier
+ * @breif La fonction ferme le fichier
  *
- * @author Raphael Bauvin
- * @return 0 si fichier fermé avec succé
+ * @return 0 si fichier est fermé avec succés
  */
 int close_log(void) { return fclose(fichier); }
 
 /**
- * La fonction écris dans les logs le message ainsi que la date et l'heure
- * d'enregistrement
+ * @brief La fonction écrit dans les logs le message ainsi que la date et
+ * l'heure d'enregistrement du message
  *
- * @author Johann
- *
+ * @param trace : le message à écrire
  */
 void ecris_log(char *trace) {
   ecris_date_heure(2);
   fprintf(fichier, "%s\n", trace);
   fflush(fichier);
 }
+
 /**
- * La fonction
+ * @brief La fonction fait des jolies séparations dans les logs :D
  *
- * @author Johann
- *
+ * @param log : le numéro de la séparation désiré
  */
 void ecris_log_ES(int log) {
   switch (log) {
@@ -257,11 +251,11 @@ void ecris_log_ES(int log) {
 }
 
 /**
- * La fonction ouvre le fichier des logs
+ * @brief La fonction ouvre le fichier des logs
  *
+ * @param nom_prog : le nom du programme lancé
  * @return 0 si le fichier est ouvert avec succé
  * @return 1 si une erreur est survenu
- *
  */
 int init_log(char *nom_prog) {
   prog = nom_prog;

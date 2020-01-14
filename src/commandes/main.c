@@ -1,37 +1,30 @@
 /**
- * @file      main.c
- * @author    Raphael Bauvin
- * @version   2.3
+ * @file      commandes_c.c
+ * @author    Raphael Bauvin, Johann De Almeida
+ * @version   14012020
  * @date      30 Octobre 2019
- * @brief     Contient le main principale du programme ainsi que la gestion des
- * options
  *
+ * @brief     Définit les fonctions utiles a l'execution de commande.
  *
  */
-
-#include "../logs/printlog_h.h"
-#include "commandes_h.h"
-#include <errno.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <unistd.h>
+#include "../libused.h"
 
 /**
  * La commande doit respecter le format suivant :
- *./progCommande [options] {nombre repetition} {delai} {ligne de commande a
- *executer}
+ * ./progCommande [options] {nombre repetition} {delai} {ligne de commande a
+ * executer}
  *
  * Les options suivantes sont disponibles :
  *    -l ( ou -L ) pour activer les logs
  *    -h ( ou -H ) pour spécifier que le temps fournis est en heure
  *    -m ( ou -M ) pour spécifier que le temps fournis est en minute
  *    -p ( ou -P ) pour spécifier le chemin
- *    -d ( ou -D ) pour que la première execution se fasse après le delai
+ *    -d ( ou -D ) pour que la première se fasse en différé
  *
- * @author Raphael Bauvin / Johann
+ * @brief La fonction main commence par traité les options, puis récupère dans
+ * des variables les informations sur le lancement de la commande et enfin fait
+ * éxécuter la suite du programme par un processus fils
+ *
  * @param argc nombre d'argument
  * @param argv liste des arguments
  */
@@ -45,69 +38,25 @@ int main(int argc, char **argv) {
   }
 
   // ------ Gerer les options
-  int opt = 0;     // nombre d'argument sur la ligne pris par les options
-  char *path = ""; // - path
-  int h = 1;       // - heure
-  int m = 1;       // - minute
-  int l = 1;       // - log
-  int d = 1;       // - différé
-
-  for (int j = 1; j < argc; j++) {
-    if (argv[j][0] == '-') {
-      int idx = 1;
-
-      while (argv[j][idx] != '\0') {
-        // Converion du temps à attendre en heure
-        if (argv[j][idx] == 'h' || argv[j][idx] == 'H') {
-          if (m > 1) {
-            perror("Le temps ne peut pas être spécifié en minute et en heure "
-                   "en même temps\n");
-            return 4;
-          }
-          h = 3600;
-          opt++;
-        }
-        // Converion du temps à attendre en minute
-        if (argv[j][idx] == 'm' || argv[j][idx] == 'M') {
-          if (h > 1) {
-            perror("Le temps ne peut pas être spécifié en minute et en heure "
-                   "en même temps\n");
-            return 4;
-          }
-          m = 60;
-          opt++;
-        }
-        // Utilisation d'un chemin different pour l'execution du fichier
-        if (argv[j][idx] == 'p' || argv[j][idx] == 'P') {
-          path = argv[++j];
-          opt += 2;
-          if (!(strlen(path) > 0)) {
-            perror("Le chemin n'a pas été spécifié\n");
-            return 3;
-          }
-          idx += strlen(path);
-        }
-        // Utilisation d'un lancement différé
-        if ((argv[j][idx] == 'd' || argv[j][idx] == 'D') && d == 1) {
-          d = 0;
-          opt++;
-        }
-        // Utilisation des logs
-        if ((argv[j][idx] == 'l' || argv[j][idx] == 'L') && l == 1) {
-          l = 0;
-          opt++;
-          init_log(argv[0]);
-        }
-        idx++;
-      }
-    }
-  }
+  T_Options options;
+  options.path = "";
+  options.h = 1;
+  options.m = 1;
+  options.l = 1;
+  options.d = 1;
+  // opt : nombre d'argument sur la ligne pris par les options
+  int opt = gerer_options(argc, argv, &options);
+  if (opt < 0)
+    return 4;
 
   // ------ Passer la l'execution de la commande
-  int nbr = atoi(argv[++opt]);                // Nombre de répétition
-  int timewait = (atoi(argv[++opt]) * m) * h; // Temps entre chaque répétition
+  // Nombre de répétition
+  int nbr = atoi(argv[++opt]);
+  // Temps entre chaque répétition
+  int timewait = (atoi(argv[++opt]) * options.m) * options.h;
+
   if (nbr == 0 || timewait == 0) {
-    perror("Nombre d'argument invalide");
+    erreur_traitement("Nombre d'argument invalide");
     print_help();
     return 2;
   }
@@ -122,15 +71,15 @@ int main(int argc, char **argv) {
   // Création du processus qui va s'occuper de l'éxécution répété de la commande
   pid_t pid_fils = fork();
   if (pid_fils == -1) {
-    perror("Erreur fork\n");
+    erreur_traitement("Erreur fork\n");
     exit(errno);
   }
   if (pid_fils == 0) {
-    if (d == 0) {
+    if (options.d == 0) { // Si lancement en différé
       ecris_temps(timewait);
       sleep(timewait);
     }
-    exe_cmd_ntimes(nbr, timewait, taille, ligne_de_commande, path);
+    exe_cmd_ntimes(nbr, timewait, taille, ligne_de_commande, options.path);
   }
 
   // Fin du processus père
