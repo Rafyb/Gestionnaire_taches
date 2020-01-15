@@ -87,9 +87,8 @@ void print_help() {
       "	-l ( ou -L ) pour activer les logs\n"
       "	-h ( ou -H ) pour spécifier que le temps fourni est en heures\n"
       "	-m ( ou -M ) pour spécifier que le temps fourni est en minutes\n"
-      "	-p ( ou -P ) pour spécifier l'emplacement de la commande à éxécuter "
-      "avec une syntaxe spécifique\n"
-      " -d ( ou -D ) pour que la première se fasse en différé\n");
+      "	-p ( ou -P ) pour spécifier l'emplacement de la commande à éxécuter avec une syntaxe spécifique\n"
+      "	-d ( ou -D ) pour que la première se fasse en différé\n");
 }
 
 /**

@@ -258,7 +258,7 @@ void ecris_log_ES(int log) {
  * @return 1 si une erreur est survenu
  */
 int init_log(char *nom_prog) {
-  prog = nom_prog;
+  char* prog = nom_prog;
   fichier = fopen("log/test.log", "w+");
   if (fichier == NULL) {
     perror("Erreur lors de l'ouverture du fichier de log");
