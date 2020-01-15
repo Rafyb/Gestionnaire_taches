@@ -54,7 +54,6 @@ int main(int argc, char **argv) {
   int nbr = atoi(argv[++opt]);
   // Temps entre chaque répétition
   int timewait = (atoi(argv[++opt]) * options.m) * options.h;
-
   if (nbr == 0 || timewait == 0) {
     erreur_traitement("Nombre d'argument invalide");
     print_help();

@@ -32,10 +32,13 @@ void erreur_traitement(char *errorMsg) {
  * @param timewait : temps à attendre avant prochaine execution
  **/
 void ecris_temps(int timewait) {
-  char timewaitstr[12];
-  sprintf(timewaitstr, "%d", timewait);
-  char *ligne = concatLigne("Temps avant prochaine éxécution : ", timewaitstr);
-  ecris_log(concatLigne(ligne, " secondes "));
+  if (is_init()) {
+    char timewaitstr[12];
+    sprintf(timewaitstr, "%d", timewait);
+    char *ligne =
+        concatLigne("Temps avant prochaine éxécution : ", timewaitstr);
+    ecris_log(concatLigne(ligne, " secondes "));
+  }
 }
 
 /**
@@ -258,7 +261,7 @@ void ecris_log_ES(int log) {
  * @return 1 si une erreur est survenu
  */
 int init_log(char *nom_prog) {
-  char* prog = nom_prog;
+  char *prog = nom_prog;
   fichier = fopen("log/test.log", "w+");
   if (fichier == NULL) {
     perror("Erreur lors de l'ouverture du fichier de log");

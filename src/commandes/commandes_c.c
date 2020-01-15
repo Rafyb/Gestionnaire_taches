@@ -96,7 +96,7 @@ void print_help() {
       "	-m ( ou -M ) pour spécifier que le temps fourni est en minutes\n"
       "	-p ( ou -P ) pour spécifier l'emplacement de la commande à éxécuter "
       "avec une syntaxe spécifique\n"
-      "	-d ( ou -D ) pour que la première se fasse en différé\n");
+      "	-d ( ou -D ) pour que la première execution se fasse en différé\n");
 }
 
 /**
@@ -158,8 +158,7 @@ int exe_cmd_ntimes(int nbr, int timewait, int argc, char **argv, char *path) {
     nbr--;
     // Tant qu'il reste une execution on attends avant la suivante
     if (nbr != 0) {
-      if (is_init())
-        ecris_temps(timewait);
+      ecris_temps(timewait);
       sleep(timewait);
     }
   }
