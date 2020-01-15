@@ -43,6 +43,12 @@ Le programme comporte les options suivantes qui peuvent être cumulées :
  Exemple d'utilisation : `./progCommande -m 2 20 emacs`
   -> Le programme éxécutera 2 fois emacs avec 20 minutes d'écart
  
- Exemple d'utilisations cumulées : `./progCommande -l -m -p "/snap/bin/emacs" 4 15 emacs`
-  -> Le programme éxécutera 4 fois emacs qui se situe dans /snap/bin/ avec 15 minutes d'écart et écrira une trace d'éxécution dans le fichier test.log
+   * -d ( ou -D ) qui permet de spécifier un temps d'attentes avant la première éxécution
+ Exemple d'utilisation : `./progCommande -d 10 2 20 emacs`
+  -> Le programme éxécutera 2 fois emacs, la premières fois après 10 secondes et la seconde fois avec 20 secondes d'écart
  
+ 
+ Exemple d'utilisation cumulée : `./progCommande -l -m -d 1 -p "/snap/bin/emacs" 3 2 emacs -T toto`
+  -> Le programme éxécutera 3 fois emacs qui se situe dans /snap/bin/ avec 15 minutes d'écart et écrira une trace d'éxécution dans le fichier test.log. La première éxécution se fera 1 minute après le lancement de la commande
+ 
+Exemple d'utilisation plus concrète : Vous avez un programme sonnerie sur votre ordinateur, vous etes concentré sur votre correction de projet et vous ne voulez pas rater votre bus dans une heure. Pour cela vous pouvez utiliser la commande suivante : `./progCommande -h -d 1 -p "/mes_programmes/sonnerie" 1 1 sonnerie`. La commande lancera sonnerie 1 fois dans 1 heure après le lancement de la commande.
