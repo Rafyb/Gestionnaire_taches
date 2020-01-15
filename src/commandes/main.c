@@ -42,8 +42,8 @@ int main(int argc, char **argv) {
   options.path = "";
   options.h = 1;
   options.m = 1;
-  options.l = 1;
-  options.d = 1;
+  options.l = 0;
+  options.d = 0;
   // opt : nombre d'argument sur la ligne pris par les options
   int opt = gerer_options(argc, argv, &options);
   if (opt < 0)
@@ -75,10 +75,8 @@ int main(int argc, char **argv) {
     exit(errno);
   }
   if (pid_fils == 0) {
-    if (options.d == 0) { // Si lancement en différé
-      ecris_temps(timewait);
-      sleep(timewait);
-    }
+    ecris_temps(options.d * options.h * options.m);
+    sleep(options.d * options.h * options.m);
     exe_cmd_ntimes(nbr, timewait, taille, ligne_de_commande, options.path);
   }
 

@@ -1,16 +1,16 @@
 - programme lancé: progCommande
 - répertoire courant: /home/raphael/Gestionnaire_taches
 - chemin complet: /home/raphael/Gestionnaire_taches/progCommande
-Mardi 14 Janvier 2020, 10:13:09
+Mercredi 15 Janvier 2020, 21:07:41
 ====================================================
-                  DEBUT DU TRAITEMENT   
+                  DEBUT DU TRAITEMENT
 ====================================================
-|| 14/01/2020 - 10:13:09 || Temps avant prochaine éxécution : 60 secondes 
-|| 14/01/2020 - 10:14:09 || Temps avant prochaine éxécution : 60 secondes 
-|| 14/01/2020 - 10:14:09 || Execution de la commande : /snap/bin/emacs
-|| 14/01/2020 - 10:15:09 || Temps avant prochaine éxécution : 60 secondes 
-|| 14/01/2020 - 10:15:09 || Execution de la commande : /snap/bin/emacs
-|| 14/01/2020 - 10:16:09 || Execution de la commande : /snap/bin/emacs
+|| 15/01/2020 - 21:07:41 || Temps avant prochaine éxécution : 60 secondes
+|| 15/01/2020 - 21:08:41 || Execution de la commande : /snap/bin/emacs
+|| 15/01/2020 - 21:08:41 || Temps avant prochaine éxécution : 120 secondes
+|| 15/01/2020 - 21:10:41 || Execution de la commande : /snap/bin/emacs
+|| 15/01/2020 - 21:10:41 || Temps avant prochaine éxécution : 120 secondes
+|| 15/01/2020 - 21:12:41 || Execution de la commande : /snap/bin/emacs
 ====================================================
               FIN NORMALE DU TRAITEMENT
 ====================================================

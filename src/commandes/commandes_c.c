@@ -46,22 +46,29 @@ int gerer_options(int argc, char **argv, T_Options *options) {
           opt++;
         }
         // Utilisation d'un chemin different pour l'execution du fichier
-        if (argv[j][idx] == 'p' || argv[j][idx] == 'P') {
+        if ((argv[j][idx] == 'p' || argv[j][idx] == 'P') &&
+            (strlen(options->path) < 1)) {
           options->path = argv[++j];
           opt += 2;
           if (!(strlen(options->path) > 0)) {
             erreur_traitement("Le chemin n'a pas été spécifié\n");
             return -1;
           }
-          idx += strlen(options->path);
+          idx += strlen(options->path) - 2;
         }
         // Utilisation d'un lancement différé
-        if ((argv[j][idx] == 'd' || argv[j][idx] == 'D') && options->d == 1) {
-          options->d = 0;
-          opt++;
+        if ((argv[j][idx] == 'd' || argv[j][idx] == 'D') && !options->d) {
+          if (atoi(argv[j + 1]) > 0) {
+            options->d = atoi(argv[++j]);
+            opt += 2;
+          } else {
+            erreur_traitement("Le temps différé n'est pas spécifié\n");
+            return -1;
+          }
+          idx += strlen(argv[j]) - 2;
         }
         // Utilisation des logs
-        if ((argv[j][idx] == 'l' || argv[j][idx] == 'L') && options->l == 1) {
+        if ((argv[j][idx] == 'l' || argv[j][idx] == 'L') && !options->l) {
           options->l = 0;
           opt++;
           init_log(argv[0]);
@@ -87,7 +94,8 @@ void print_help() {
       "	-l ( ou -L ) pour activer les logs\n"
       "	-h ( ou -H ) pour spécifier que le temps fourni est en heures\n"
       "	-m ( ou -M ) pour spécifier que le temps fourni est en minutes\n"
-      "	-p ( ou -P ) pour spécifier l'emplacement de la commande à éxécuter avec une syntaxe spécifique\n"
+      "	-p ( ou -P ) pour spécifier l'emplacement de la commande à éxécuter "
+      "avec une syntaxe spécifique\n"
       "	-d ( ou -D ) pour que la première se fasse en différé\n");
 }
 
