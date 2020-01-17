@@ -6,7 +6,13 @@
  * @brief     Définit les fonctions utiles a l'ecritures dans les logs.
  *
  */
-#include "../libused.h"
+
+#include "printlog_h.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+#include <unistd.h>
 
 FILE *fichier = NULL;
 

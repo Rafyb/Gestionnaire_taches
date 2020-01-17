@@ -7,7 +7,14 @@
  * @brief     Définit les fonctions utiles a l'execution de commande.
  *
  */
-#include "../libused.h"
+#include "../logs/printlog_h.h"
+#include "commandes_h.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <unistd.h>
 
 /**
  * @brief La fonction parcourt les arguments et enregistre les options dans

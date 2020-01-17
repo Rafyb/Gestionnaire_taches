@@ -7,7 +7,14 @@
  * @brief     Définit les fonctions utiles a l'execution de commande.
  *
  */
-#include "../libused.h"
+#include "../logs/printlog_h.h"
+#include "commandes_h.h"
+#include <errno.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <unistd.h>
 
 /**
  * La commande doit respecter le format suivant :
